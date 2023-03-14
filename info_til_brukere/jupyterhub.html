@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JupyterHub &mdash; KFF Tungregning</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/togglebutton.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="LAMMPS" href="lammps.html" />
+    <link rel="prev" title="Python" href="python.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            KFF Tungregning  
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="access.html">Access and login</a></li>
+<li class="toctree-l1"><a class="reference internal" href="home_directory.html">Home directory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jobs.html">Submitting jobs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="history.html">History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="software.html">Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python.html">Python</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">JupyterHub</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#running-jupyterhub-from-a-python-environment">Running JupyterHub from a Python environment</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="lammps.html">LAMMPS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="julia.html">Julia</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">KFF Tungregning  </a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">JupyterHub</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/uio-ccse/kff-tungregning-user-guide/blob/main/info_til_brukere/jupyterhub.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="jupyterhub">
+<h1>JupyterHub<a class="headerlink" href="#jupyterhub" title="Permalink to this heading"></a></h1>
+<p>JupyterHub is installed on <code class="docutils literal notranslate"><span class="pre">egil-analyze</span></code>, <code class="docutils literal notranslate"><span class="pre">neuroai</span></code> and <code class="docutils literal notranslate"><span class="pre">bioai</span></code>. For security reasons, it is only available through the cabeled network at CCSE. However, it is possible to set up a SSH tunnel. JupyterHub is set up to send and receive signals on port 8000. Suppose that port 8000 is available on your computer, set up a SSH tunnel through the port by running:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ssh</span> <span class="o">-</span><span class="n">L</span> <span class="mi">8000</span><span class="p">:</span><span class="n">localhost</span><span class="p">:</span><span class="mi">8000</span> <span class="o">&lt;</span><span class="n">brukernavn</span><span class="o">&gt;@&lt;</span><span class="n">egil</span><span class="o">-</span><span class="n">analyze</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>JupyterHub can now be reached at <code class="docutils literal notranslate"><span class="pre">localhost:8000</span></code> from the browser.</p>
+<p>The before you run JupyterHub for the first time, create a directory where the Python specifications are stored. This directory is read by jupyter:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w">  </span>.local/share/jupyter/kernels
+</pre></div>
+</div>
+<section id="running-jupyterhub-from-a-python-environment">
+<h2>Running JupyterHub from a Python environment<a class="headerlink" href="#running-jupyterhub-from-a-python-environment" title="Permalink to this heading"></a></h2>
+<p>Suppose that a virtual environment with name “env” is already set up like explained in the guide on the previous page. Activate the environment and install <code class="docutils literal notranslate"><span class="pre">ipykernel</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pyenv</span> <span class="n">activate</span> <span class="n">env</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">ipykernel</span> 
+</pre></div>
+</div>
+<p>Then, register this environment to be used in JupyterHub</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">ipykernel</span> <span class="n">install</span> <span class="o">--</span><span class="n">name</span> <span class="s2">&quot;env&quot;</span> <span class="o">--</span><span class="n">display</span><span class="o">-</span><span class="n">name</span> <span class="s2">&quot;My Env&quot;</span> <span class="o">--</span><span class="n">user</span>
+</pre></div>
+</div>
+<p>Now the environment is available in jupyterlab. To install pip-packages directly in jupyterlab, activate your environment in the jupyterlab terminal and install packages:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pyenv</span> <span class="n">activate</span> <span class="n">env</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">numpy</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="python.html" class="btn btn-neutral float-left" title="Python" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="lammps.html" class="btn btn-neutral float-right" title="LAMMPS" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, KFF Tungregning.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

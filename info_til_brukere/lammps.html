@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LAMMPS &mdash; KFF Tungregning</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/togglebutton.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Julia" href="julia.html" />
+    <link rel="prev" title="JupyterHub" href="jupyterhub.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            KFF Tungregning  
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="access.html">Access and login</a></li>
+<li class="toctree-l1"><a class="reference internal" href="home_directory.html">Home directory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jobs.html">Submitting jobs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="history.html">History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="software.html">Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python.html">Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jupyterhub.html">JupyterHub</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">LAMMPS</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#examples-on-running-lammps">Examples on running LAMMPS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#building-lammps-on-your-own">Building LAMMPS on your own</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-lammps-from-python">Running LAMMPS from Python</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#example-1-simple-cpu-job">Example 1: Simple CPU job</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-2-gpu-job">Example 2: GPU job</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-3-gpu-job-submitted-to-slurm">Example 3: GPU job submitted to Slurm</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="julia.html">Julia</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">KFF Tungregning  </a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">LAMMPS</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/uio-ccse/kff-tungregning-user-guide/blob/main/info_til_brukere/lammps.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="lammps">
+<h1>LAMMPS<a class="headerlink" href="#lammps" title="Permalink to this heading"></a></h1>
+<p>A (recent) version of <a class="reference external" href="https://www.lammps.org">LAMMPS</a> should always be available on all nodes. The main executable is <code class="docutils literal notranslate"><span class="pre">lmp</span></code>, and is located at <code class="docutils literal notranslate"><span class="pre">/usr/local/bin</span></code>. This executable is built with a selection of LAMMPS packages, including</p>
+<ul class="simple">
+<li><p>Granular</p></li>
+<li><p>KOKKOS (on GPU nodes)</p></li>
+<li><p>KSpace</p></li>
+<li><p>Manybody</p></li>
+<li><p>Molecule</p></li>
+<li><p>Python</p></li>
+<li><p>Rigid</p></li>
+</ul>
+<p>The LAMMPS executable is unique on every GPU as it has to match the architecture, and may differ from node to node. If you need other LAMMPS packages than the ones listed, we encourage you to build LAMMPS on your own. See guide below.</p>
+<section id="examples-on-running-lammps">
+<h2>Examples on running LAMMPS<a class="headerlink" href="#examples-on-running-lammps" title="Permalink to this heading"></a></h2>
+<p>Two CPU nodes à 16 CPU cores:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mpirun<span class="w"> </span>-n<span class="w"> </span><span class="m">32</span><span class="w"> </span>lmp<span class="w"> </span>-in<span class="w"> </span><span class="k">in</span>.lammps
+</pre></div>
+</div>
+<p>A GPU with KOKKOS:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mpirun<span class="w"> </span>-n<span class="w"> </span><span class="m">1</span><span class="w"> </span>lmp<span class="w"> </span>-in<span class="w"> </span><span class="k">in</span>.lammps<span class="w"> </span>-sf<span class="w"> </span>kk<span class="w"> </span>-pk<span class="w"> </span>newton<span class="w"> </span>on<span class="w"> </span>neigh<span class="w"> </span>half<span class="w"> </span>-g<span class="w"> </span>on<span class="w"> </span><span class="m">1</span>
+</pre></div>
+</div>
+</section>
+<section id="building-lammps-on-your-own">
+<h2>Building LAMMPS on your own<a class="headerlink" href="#building-lammps-on-your-own" title="Permalink to this heading"></a></h2>
+<p>Building a customized LAMMPS setup on your own can be done in several ways, but we recommend to use CMake which will be presented here. First, clone the GitHub repository containing the source code:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/lammps/lammps.git
+</pre></div>
+</div>
+<p>Then, create a new build directory and build using <code class="docutils literal notranslate"><span class="pre">ccmake</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>lammps/cmake/build
+<span class="nb">cd</span><span class="w"> </span>lammps/cmake/build
+ccmake<span class="w"> </span>..
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">ccmake</span></code> provides a terminal user interface for CMake, where you first need to pick the desired packages (for instance the ones listed above). When the packages are ticked, configure with <code class="docutils literal notranslate"><span class="pre">c</span></code>. Second, you need to choose the architecture. For the GPU nodes, pick the correct architecture from the table below. Also, you need to tick off the option <code class="docutils literal notranslate"><span class="pre">KOKKOS_ENABLE_CUDA</span></code> if LAMMPS was built with the KOKKOS package (recommended). Then configure again using <code class="docutils literal notranslate"><span class="pre">c</span></code>, and finally generate makefile using <code class="docutils literal notranslate"><span class="pre">g</span></code>.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>GPU</p></th>
+<th class="head"><p>Architecture</p></th>
+<th class="head"><p>Computers</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>P100</p></td>
+<td><p>PASCAL60</p></td>
+<td><p>bigfacet</p></td>
+</tr>
+<tr class="row-odd"><td><p>A100</p></td>
+<td><p>AMPERE80</p></td>
+<td><p>hugefacet, greatfacet</p></td>
+</tr>
+<tr class="row-even"><td><p>RTX 3090</p></td>
+<td><p>AMPERE86</p></td>
+<td><p>egil-analyze, neuroai</p></td>
+</tr>
+<tr class="row-odd"><td><p>RTX 2080</p></td>
+<td><p>TURING75</p></td>
+<td><p>bioai, rahman</p></td>
+</tr>
+</tbody>
+</table>
+<p>Compile with</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>-j32
+</pre></div>
+</div>
+<p>and then add the path to the executable to <code class="docutils literal notranslate"><span class="pre">$PATH</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;export PATH=~/lammps/cmake/build:</span><span class="nv">$PATH</span><span class="s2">&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.bashrc
+</pre></div>
+</div>
+<p>Feel free to ask for help when building LAMMPS, everything is not necessarily obvious.</p>
+</section>
+<section id="running-lammps-from-python">
+<h2>Running LAMMPS from Python<a class="headerlink" href="#running-lammps-from-python" title="Permalink to this heading"></a></h2>
+<p>LAMMPS scripts can be launched from Python using <a class="reference external" href="https://github.com/evenmn/lammps-simulator">lammps-simulator</a>. Install from source using</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>lammps-simulator
+</pre></div>
+</div>
+<section id="example-1-simple-cpu-job">
+<h3>Example 1: Simple CPU job<a class="headerlink" href="#example-1-simple-cpu-job" title="Permalink to this heading"></a></h3>
+<p>The following script will run the LAMMPS script <code class="docutils literal notranslate"><span class="pre">in.lammps</span></code> on 4 CPUs using the <code class="docutils literal notranslate"><span class="pre">lmp</span></code> executable:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>from<span class="w"> </span>lammps_simulator<span class="w"> </span>import<span class="w"> </span>Simulator
+
+<span class="nv">sim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>Simulator<span class="o">(</span><span class="nv">directory</span><span class="o">=</span><span class="s2">&quot;simulation&quot;</span><span class="o">)</span>
+sim.set_input_script<span class="o">(</span><span class="s2">&quot;in.lammps&quot;</span><span class="o">)</span>
+sim.run<span class="o">(</span><span class="nv">num_procs</span><span class="o">=</span><span class="m">4</span>,<span class="w"> </span><span class="nv">lmp_exec</span><span class="o">=</span><span class="s2">&quot;lmp&quot;</span><span class="o">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-2-gpu-job">
+<h3>Example 2: GPU job<a class="headerlink" href="#example-2-gpu-job" title="Permalink to this heading"></a></h3>
+<p>The script below will run the LAMMPS script <code class="docutils literal notranslate"><span class="pre">in.lammps</span></code> on 1 GPU using the <code class="docutils literal notranslate"><span class="pre">lmp</span></code> executable. It will by default use the KOKKOS package.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>from<span class="w"> </span>lammps_simulator<span class="w"> </span>import<span class="w"> </span>Simulator
+from<span class="w"> </span>lammps_simulator.computer<span class="w"> </span>import<span class="w"> </span>GPU
+
+<span class="nv">computer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>GPU<span class="o">(</span><span class="nv">lmp_exec</span><span class="o">=</span><span class="s2">&quot;lmp&quot;</span>,<span class="w"> </span><span class="nv">gpus_per_node</span><span class="o">=</span><span class="m">1</span><span class="o">)</span>
+
+<span class="nv">sim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>Simulator<span class="o">(</span><span class="nv">directory</span><span class="o">=</span><span class="s2">&quot;simulation&quot;</span><span class="o">)</span>
+sim.set_input_script<span class="o">(</span><span class="s2">&quot;in.lammps&quot;</span><span class="o">)</span>
+sim.run<span class="o">(</span><span class="nv">computer</span><span class="o">=</span>computer<span class="o">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-3-gpu-job-submitted-to-slurm">
+<h3>Example 3: GPU job submitted to Slurm<a class="headerlink" href="#example-3-gpu-job-submitted-to-slurm" title="Permalink to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>from<span class="w"> </span>lammps_simulator<span class="w"> </span>import<span class="w"> </span>Simulator
+from<span class="w"> </span>lammps_simulator.computer<span class="w"> </span>import<span class="w"> </span>SlurmGPU
+
+<span class="nv">slurm_args</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span><span class="s2">&quot;job-name&quot;</span>:<span class="w"> </span><span class="s2">&quot;GPU-job&quot;</span>,
+<span class="w">              </span><span class="s2">&quot;partition&quot;</span>:<span class="w"> </span><span class="s2">&quot;normal&quot;</span>,
+<span class="w">              </span><span class="s2">&quot;ntasks&quot;</span>:<span class="w"> </span><span class="m">1</span>,
+<span class="w">              </span><span class="s2">&quot;cpus-per-task&quot;</span>:<span class="w"> </span><span class="s2">&quot;2&quot;</span>,
+<span class="w">              </span><span class="s2">&quot;gres&quot;</span>:<span class="w"> </span><span class="s2">&quot;gpu:1&quot;</span>,
+<span class="w">              </span><span class="s2">&quot;output&quot;</span>:<span class="w"> </span><span class="s2">&quot;slurm.out&quot;</span>,
+<span class="w">              </span><span class="o">}</span>
+
+<span class="nv">computer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>SlurmGPU<span class="o">(</span><span class="nv">lmp_exec</span><span class="o">=</span><span class="s2">&quot;lmp&quot;</span>,<span class="w"> </span><span class="nv">slurm_args</span><span class="o">=</span>slurm_args<span class="o">)</span>
+
+<span class="nv">sim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>Simulator<span class="o">(</span><span class="nv">directory</span><span class="o">=</span><span class="s2">&quot;simulation&quot;</span><span class="o">)</span>
+sim.set_input_script<span class="o">(</span><span class="s2">&quot;in.lammps&quot;</span><span class="o">)</span>
+sim.run<span class="o">(</span><span class="nv">computer</span><span class="o">=</span>computer<span class="o">)</span>
+</pre></div>
+</div>
+<p>For more examples and functionality, see the <a class="reference external" href="https://github.com/evenmn/lammps-simulator">GitHub repository</a>.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="jupyterhub.html" class="btn btn-neutral float-left" title="JupyterHub" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="julia.html" class="btn btn-neutral float-right" title="Julia" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, KFF Tungregning.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

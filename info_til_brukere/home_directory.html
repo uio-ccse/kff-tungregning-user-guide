@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home directory &mdash; KFF Tungregning</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/togglebutton.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Submitting jobs" href="jobs.html" />
+    <link rel="prev" title="Access and login" href="access.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            KFF Tungregning  
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="access.html">Access and login</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Home directory</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#syncronizing-files-and-directories">Syncronizing files and directories</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsync"><code class="docutils literal notranslate"><span class="pre">rsync</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#git"><code class="docutils literal notranslate"><span class="pre">git</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#storage-space">Storage space</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="jobs.html">Submitting jobs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="history.html">History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="software.html">Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python.html">Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jupyterhub.html">JupyterHub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lammps.html">LAMMPS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="julia.html">Julia</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">KFF Tungregning  </a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Home directory</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/uio-ccse/kff-tungregning-user-guide/blob/main/info_til_brukere/home_directory.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="home-directory">
+<h1>Home directory<a class="headerlink" href="#home-directory" title="Permalink to this heading"></a></h1>
+<p>The home directory is always created on <code class="docutils literal notranslate"><span class="pre">egil-analyze</span></code>, and then mounted on all other nodes on the cluster using the NFS service. In practice, this means that the home directory is mirrored on all nodes, with the same contents and permissions. Similarly, all users are syncronized across the entire cluster with the same password, UID and GID.</p>
+<section id="syncronizing-files-and-directories">
+<h2>Syncronizing files and directories<a class="headerlink" href="#syncronizing-files-and-directories" title="Permalink to this heading"></a></h2>
+<section id="rsync">
+<h3><code class="docutils literal notranslate"><span class="pre">rsync</span></code><a class="headerlink" href="#rsync" title="Permalink to this heading"></a></h3>
+<p>Files and directories can be syncronized from a remote (non-cluster) computer using <code class="docutils literal notranslate"><span class="pre">scp</span></code>or <code class="docutils literal notranslate"><span class="pre">rsync</span></code>. <code class="docutils literal notranslate"><span class="pre">rsync</span></code> should be the preferred command, as it supports more advanced filtering and is the successor of <code class="docutils literal notranslate"><span class="pre">scp</span></code>. To move a file <code class="docutils literal notranslate"><span class="pre">/home/user/myfile</span></code> from <code class="docutils literal notranslate"><span class="pre">node1</span></code> to <code class="docutils literal notranslate"><span class="pre">node2</span></code>, use</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rsync<span class="w"> </span>-av<span class="w"> </span>node1:/home/user/myfile<span class="w"> </span>node2:/home/user/myfile
+</pre></div>
+</div>
+<p>and similarly, a directory <code class="docutils literal notranslate"><span class="pre">mydir</span></code>can be moved using</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rsync<span class="w"> </span>-av<span class="w"> </span>node1:/home/user/mydir<span class="w"> </span>node2:/home/user/mydir
+</pre></div>
+</div>
+<p>If the directory already exists, only the files with the same name will be overwritten.</p>
+</section>
+<section id="git">
+<h3><code class="docutils literal notranslate"><span class="pre">git</span></code><a class="headerlink" href="#git" title="Permalink to this heading"></a></h3>
+<p>The cluster has internet connection to the world, and provides permissions for <code class="docutils literal notranslate"><span class="pre">http</span></code>, <code class="docutils literal notranslate"><span class="pre">https</span></code> and <code class="docutils literal notranslate"><span class="pre">ssh</span></code> through a redsocks proxy. Therefore, <code class="docutils literal notranslate"><span class="pre">git</span></code> can be used to fetch external repositories directly to your home directory, typically using</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/username/reponame.git
+</pre></div>
+</div>
+</section>
+</section>
+<section id="storage-space">
+<h2>Storage space<a class="headerlink" href="#storage-space" title="Permalink to this heading"></a></h2>
+<p>All users share the same storage space for the home directory. Please respect that and do not occupy unreasonably amount of space. If the file system gets filled up, all jobs will stop for all users across the entire cluster. To check how much space your home directory occupies, execute</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>du<span class="w"> </span>-lh<span class="w"> </span>--max-dept<span class="o">=</span><span class="m">1</span>
+</pre></div>
+</div>
+<p>in your home directory. This might take some time if you have many files. The home directories are physically stored on <code class="docutils literal notranslate"><span class="pre">egil-analyze</span></code>, which has 6 x 14TB disks set up with RAID 10. All data is actually stored twice for security reasons, and for that reason the total storage space is 42TB. To check how much space that is available in the disks, execute</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>df<span class="w"> </span>-lh
+</pre></div>
+</div>
+<p>on <code class="docutils literal notranslate"><span class="pre">egil-analyze</span></code>.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="access.html" class="btn btn-neutral float-left" title="Access and login" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="jobs.html" class="btn btn-neutral float-right" title="Submitting jobs" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, KFF Tungregning.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

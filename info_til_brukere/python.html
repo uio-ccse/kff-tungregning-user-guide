@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Python &mdash; KFF Tungregning</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/togglebutton.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="JupyterHub" href="jupyterhub.html" />
+    <link rel="prev" title="Software" href="software.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            KFF Tungregning  
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="access.html">Access and login</a></li>
+<li class="toctree-l1"><a class="reference internal" href="home_directory.html">Home directory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jobs.html">Submitting jobs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="history.html">History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="software.html">Software</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Python</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#setting-up-a-python-environment">Setting up a Python environment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#virtualenv">virtualenv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyenv">pyenv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#anaconda-and-poetry">Anaconda and poetry</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="jupyterhub.html">JupyterHub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lammps.html">LAMMPS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="julia.html">Julia</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">KFF Tungregning  </a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Python</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/uio-ccse/kff-tungregning-user-guide/blob/main/info_til_brukere/python.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="python">
+<h1>Python<a class="headerlink" href="#python" title="Permalink to this heading"></a></h1>
+<p>A recent version of <code class="docutils literal notranslate"><span class="pre">Python</span> <span class="pre">3</span></code> is always available on all nodes (at the moment of writing, version 3.8.10). Also, some popular Python packages are preinstalled on all nodes, including <code class="docutils literal notranslate"><span class="pre">numpy</span></code>, <code class="docutils literal notranslate"><span class="pre">scipy</span></code> and <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>. However, since it is impossible to preinstall all Python packages that the users may need, we encourage you to setup your own Python environment</p>
+<section id="setting-up-a-python-environment">
+<h2>Setting up a Python environment<a class="headerlink" href="#setting-up-a-python-environment" title="Permalink to this heading"></a></h2>
+<p>There are several different Python environments available, typically with different applications. Some popular are</p>
+<ul class="simple">
+<li><p><strong>virtualenv (venv)</strong> lets you create a basic environment. Integrated in the Python distribution</p></li>
+<li><p><strong>pyenv</strong> lets you create an environment with a specific Python version (ex. 3.8.10)</p></li>
+<li><p><strong>Armadillo</strong> external Python package manager</p></li>
+<li><p><strong>Poetry</strong> external Python package manager</p></li>
+</ul>
+<p>For the cluster, we recommend using <code class="docutils literal notranslate"><span class="pre">pyenv</span></code>.</p>
+<section id="virtualenv">
+<h3>virtualenv<a class="headerlink" href="#virtualenv" title="Permalink to this heading"></a></h3>
+<p>Create a new environment named “env”:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>env
+</pre></div>
+</div>
+<p>Activate environment:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>env/bin/activate
+</pre></div>
+</div>
+<p>Now, packages can be installed directly on this local environment, ex. numpy:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>numpy
+</pre></div>
+</div>
+<p>Deactivate environment:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>deactivate
+</pre></div>
+</div>
+</section>
+<section id="pyenv">
+<h3>pyenv<a class="headerlink" href="#pyenv" title="Permalink to this heading"></a></h3>
+<p>Run the following commands to install <code class="docutils literal notranslate"><span class="pre">pyenv-virtualenv</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+echo &#39;export PYENV_ROOT=&quot;$HOME/.pyenv&quot;&#39; &gt;&gt; ~/.bashrc
+echo &#39;export PATH=&quot;$PYENV_ROOT/bin:$PATH&quot;&#39; &gt;&gt; ~/.bashrc
+echo &#39;eval &quot;$(pyenv init --path)&quot;&#39; &gt;&gt; ~/.bashrc
+echo -e &#39;if command -v pyenv 1&gt;/dev/null 2&gt;&amp;1; then\n eval &quot;$(pyenv init -)&quot;\nfi&#39; &gt;&gt; ~/.bashrc
+exec $SHELL
+git clone https://github.com/pyenv/pyenv-virtualenv.git $(pyenv root)/plugins/pyenv-virtualenv
+echo &#39;eval &quot;$(pyenv virtualenv-init -)&quot;&#39; &gt;&gt; ~/.bashrc
+exec $SHELL
+</pre></div>
+</div>
+<p>Then, create a new virtual environment, with Python 3.8.10, for instance:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pyenv</span> <span class="n">install</span> <span class="mf">3.8.10</span>
+<span class="n">pyenv</span> <span class="n">virtualenv</span> <span class="mf">3.8.10</span> <span class="n">env</span>
+</pre></div>
+</div>
+<p>The upper command usually takes some time. Then, activate the environment:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pyenv</span> <span class="n">activate</span> <span class="n">env</span>
+</pre></div>
+</div>
+<p>Now, packages can be installed directly on this local environment, ex. numpy:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>numpy
+</pre></div>
+</div>
+</section>
+<section id="anaconda-and-poetry">
+<h3>Anaconda and poetry<a class="headerlink" href="#anaconda-and-poetry" title="Permalink to this heading"></a></h3>
+<p>Anaconda and poetry are not installed yet, but can be set up on request.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="software.html" class="btn btn-neutral float-left" title="Software" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="jupyterhub.html" class="btn btn-neutral float-right" title="JupyterHub" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, KFF Tungregning.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
