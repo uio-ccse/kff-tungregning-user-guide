@@ -61,8 +61,8 @@ html_static_path = []
 html_context = {
     'display_github': True,
     'github_user': 'uio-ccse',
-    'github_repo': 'kvv-tungregning',
-    'github_version': 'master/' ,
+    'github_repo': 'kff-tungregning-user-guide',
+    'github_version': 'main/' ,
 }
 
 # for Sphinx-1.3
